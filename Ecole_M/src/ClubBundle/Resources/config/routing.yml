@@ -1,0 +1,19 @@
+club_homepage:
+    path:     /
+    defaults: { _controller: ClubBundle:Default:index }
+
+add:
+    path:     /add
+    defaults: { _controller: ClubBundle:Clubs:add }
+
+update:
+    path:     /update
+    defaults: { _controller: ClubBundle:Clubs:update }
+
+delete:
+    path:     /delete
+    defaults: { _controller: ClubBundle:Clubs:delete }
+
+view:
+    path:     /view
+    defaults: { _controller: ClubBundle:Clubs:view }
