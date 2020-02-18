@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme edit_form 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+    {% block fixednavbar %}
+        {{ parent() }}
+    {% endblock fixednavbar%}
+
+
+    {% block container %}
+        <div class="container">
+            <h1 style="color: #00acee">Modification Sanction</h1>
+            {{ form_start(edit_form) }}
+            <div class="form-group">
+                {{ form_widget(edit_form) }}
+                <div class="form-group" style="margin-top: 10px">
+                    <div class="form-actions">
+                        <input class="btn btn-lg btn-success btn-block" type="submit" value="Edit" />
+                    </div>
+                </div>
+            </div>
+            {{ form_end(edit_form) }}
+            <ul>
+                <li>
+                    <a href="{{ path('sanctions_index') }}">Back to the list</a>
+                </li>
+            </ul>
+        </div>
+    {% endblock container %}
+
+    {% block footer %}
+        {{ parent() }}
+    {% endblock footer %}
+
+{% endblock body %}
