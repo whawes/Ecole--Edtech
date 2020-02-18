@@ -1,0 +1,27 @@
+user_homepage:
+    path:     /showeleves
+    defaults: { _controller: UserBundle:User:showeleves }
+
+user_espaceparent:
+    path:     /espaceparent
+    defaults: { _controller: UserBundle:User:espaceparent }
+
+user_profile:
+    path:   /userprofile
+    defaults: { _controller: UserBundle:User:profile }
+
+user_notes:
+    path:   /{id}/usernotes
+    defaults: { _controller: UserBundle:User:usernotes}
+
+user_absences:
+    path:   /{id}/userabsences
+    defaults: { _controller: UserBundle:User:userabsences }
+
+user_sanctions:
+    path:   /{id}/usersanctions
+    defaults: { _controller: UserBundle:User:usersanctions}
+
+user_indexclasses:
+    path:   /indexclasses
+    defaults: { _controller: UserBundle:User:indexclasses}
