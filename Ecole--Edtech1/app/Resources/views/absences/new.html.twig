@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+{% block fixednavbar %}
+    {{ parent() }}
+{% endblock fixednavbar%}
+
+    {% block container %}
+        <div class="container">
+    <h1>Absence creation</h1>
+    {{ form_start(form) }}
+    <div class="form-group">
+        {{ form_label(form.date_abs) }}
+        {{ form_widget(form.date_abs) }}
+        {{ form_label(form.justification) }}
+        {{ form_widget(form.justification) }}
+        {{ form_label(form.heuredebut) }}
+        {{ form_widget(form.heuredebut) }}
+        {{ form_label(form.heurefin) }}
+        {{ form_widget(form.heurefin) }}
+        {{ form_label(form.eleve) }}
+        {{ form_widget(form.eleve) }}
+        {{ form_label(form.etat, { 'attr': {'class': 'hidden-row'} }) }}
+        {{ form_widget(form.etat, { 'attr': {'class': 'hidden-row'} }) }}
+    <div class="form-group" style="margin-top: 10px">
+        <div class="form-actions">
+            <input class="btn btn-lg btn-success btn-block" type="submit" value="Create" />
+        </div>
+    </div>
+    </div>
+    {{ form_end(form) }}
+    <ul>
+        <li>
+            <a href="{{ path('absences_index') }}">Back to the list</a>
+        </li>
+    </ul>
+</div>
+{% endblock container %}
+
+    {% block footer %}
+        {{ parent() }}
+    {% endblock footer %}
+
+{% endblock body %}
