@@ -1,0 +1,80 @@
+{% extends '/back/baseBack.html.twig' %}
+{% block title %}Admin{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock stylesheets %}
+
+{% block body %}
+    {% block header %}
+        {{ parent() }}
+    {% endblock header  %}
+
+    {% block sideBar %}
+        {{ parent() }}
+    {% endblock  sideBar %}
+
+    {% block container %}
+        {{ parent() }}
+    {% endblock container %}
+
+<div class="main-content">
+    <h1>Liste des demandes de permutations</h1>
+    <br/>
+    <div class="col-md-12">
+
+        <div class="table-responsive table-responsive-data2">
+            <table class="table table-data2">
+                <thead>
+                <tr>
+                    <th>ID User</th>
+                    <th>ID Demande</th>
+                    <th>Niveau</th>
+                    <th>Classe originale</th>
+                    <th>Classe souhaitée</th>
+                    <th>Date</th>
+                    <th>Etat</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="tr-shadow">
+                <tr class="spacer"></tr>
+
+                {% for permutation in permutations %}
+                    <tr class="tr-shadow">
+
+                        <td class="main-content">{{ permutation.iduser }}</td>
+                        <td class="main-content">{{ permutation.id }}</td>
+                        <td class="main-content">{{ permutation.niveau }}</td>
+                        <td class="main-content">{{ permutation.classeO }}</td>
+                        <td class="main-content">{{ permutation.classeS }}</td>
+                        <td class="main-content">{% if permutation.date %}{{ permutation.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td class="status--process"><span
+                                    {% if permutation.etat=='non traitee' %}
+                                    class="status--denied"
+                                    {% else %}
+                                        class="status--process"
+                                    {% endif %}>{{ permutation.etat }}</span></td>
+
+                        <td>
+                            {% if permutation.etat=='non traitee' %}
+                        <a href="{{ path('traiter_permutation', { 'id': permutation.id }) }}">Traiter <i class="zmdi zmdi-edit"></i></a>
+
+                            {% endif %}
+                        <a href="{{ path('adminsupprimer_permutation', { 'id': permutation.id }) }}">Supprimer <i class="zmdi zmdi-delete"></i></a>
+                        </td>
+                    </tr>
+
+                {% endfor %}
+
+                <tr class="spacer"></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock javascripts %}

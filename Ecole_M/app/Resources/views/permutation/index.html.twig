@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h1 class="section-title">Liste de vos demandes de permutation</h1>
+                <table width="100%">
+                    <thead>
+                    <tr>
+                        <th>Niveau</th>
+                        <th>Classe originale</th>
+                        <th>Classe souhaitée</th>
+                        <th>Etat</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for permutation in permutations %}
+                        <tr>
+                            <td>{{ permutation.niveau }}</td>
+                            <td>{{ permutation.classeO }}</td>
+                            <td>{{ permutation.classeS }}</td>
+                            <td>{{ permutation.etat }}</td>
+                            <td>
+                                <ul>
+                                    <li>
+                                        <a href="{{ path('permutation_show', { 'id': permutation.id }) }}">Afficher</a>
+                                    </li>
+                                    <li>
+                                        {% if permutation.etat=='non traitee' %}
+                                        <a href="{{ path('permutation_edit', { 'id': permutation.id }) }}">Modifier</a>
+                                        {% endif %}
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <br/>
+                <a href="{{ path('permutation_new') }}"class="btn">Envoyer une demande de permutation</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
