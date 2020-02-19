@@ -24,9 +24,17 @@ class Club
     /**
      * @var string
      *
-     * @ORM\Column(name="nom_club", type="string", length=255)
+     * @ORM\Column(name="nomclub", type="string", length=255)
      */
-    private $nomClub;
+    private $nomclub;
+
+
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinColumn(referencedColumnName="id")
+     */
+
+    private $User;
 
 
     /**
@@ -40,27 +48,50 @@ class Club
     }
 
     /**
-     * Set nomClub
+     * Set nomclub
      *
-     * @param string $nomClub
+     * @param string $nomclub
      *
      * @return Club
      */
-    public function setNomClub($nomClub)
+    public function setNomclub($nomclub)
     {
-        $this->nomClub = $nomClub;
+        $this->nomclub = $nomclub;
 
         return $this;
     }
 
     /**
-     * Get nomClub
+     * Get nomclub
      *
      * @return string
      */
-    public function getNomClub()
+    public function getNomclub()
     {
-        return $this->nomClub;
+        return $this->nomclub;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Club
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->User = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->User;
     }
 }
-

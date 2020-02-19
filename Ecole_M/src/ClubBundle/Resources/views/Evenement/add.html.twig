@@ -1,0 +1,111 @@
+{% extends "base.html.twig" %}
+{% block title %}Gestion Evenements{% endblock %}
+{% block body %}
+
+    {% block stylesheets %}
+        {{ parent() }}
+    {% endblock stylesheets %}
+
+
+    {% block header %}
+        {{ parent() }}
+    {% endblock header %}
+
+    {% block sideBar %}
+        {{ parent() }}
+    {% endblock  sideBar %}
+
+    {% block container %}
+        {{ parent() }}
+    {% endblock container %}
+
+
+
+<div class="main-content">
+    <h1>Create Your Event</h1>
+    <br/>
+    <div class="col-md-12">
+
+        <div class="table-data__tool">
+            <div class="table-data__tool-left">
+               <table>
+
+
+                <tr>
+                    <td >
+                {{form_start(form)}}
+                <label class="title-5 m-b-35">Event Name:</label>
+                {{ form_widget(form.nomEvenement, { 'attr': {'class': "size20",'placeholder': "Evenement"} }) }}
+
+                        <br/>
+                    </td>
+
+                </tr>
+
+                   <tr >
+                       <td>
+                <label class="title-5 m-b-35">Date et heure du début:</label>
+                {{ form_widget(form.heureDebut) }}
+                       </td><td>
+                <label class="title-5 m-b-35">Date et heure de la fin:</label>
+                {{ form_widget(form.heureFin) }}
+                       </td></tr>
+                <tr><td colspan="2">
+                    <br/><br/>
+                <label class="title-5 m-b-35">Club gérant </label>
+                {{ form_widget(form.Club) }}
+                    </td></tr>
+               </table>
+            </div>
+
+            <div class="table-data__tool-right">
+                <br/>
+                <br/><br/><br/> <br/>
+                <br/><br/><br/> <br/>
+                <button  class="au-btn au-btn-icon au-btn--green au-btn--small" type="submit" >Create Event</button>
+
+            </div>
+            {{form_end(form)}}
+
+        </div>
+
+        <div class="table-responsive table-responsive-data2">
+            <table class="table table-data2">
+                <thead>
+                <tr>
+
+                    <th>Nom du evenement</th>
+                    <th>Date et Heure du début evenement</th>
+                    <th>Date et Heure du fin evenement</th>
+                    <th>Nom Club</th>
+                    <th colspan="2 ">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="tr-shadow">
+                <tr class="spacer"></tr>
+
+                {% for c in Evenement %}
+                    <tr class="tr-shadow">
+
+                        <td class="main-content">{{  c.nomEvenement  }}</td>
+                        <td class="main-content">{{  c.heureDebut|date }}</td>
+                        <td class="main-content">{{  c.heureFin|date }}</td>
+                        <td class="main-content">{{  c.Club.nomclub }}</td>
+                        <td class="main-content" > <a href="{{ path('updateEvent',{"id":c.id}) }}">update <i class="zmdi zmdi-edit"></i></a></td>
+
+                        <td><a href="{{ path('deleteEvent',{"id":c.id}) }}">delete <i class="zmdi zmdi-delete"></i></a></td>
+                    </tr>
+
+                {% endfor %}
+
+                <tr class="spacer"></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+    {% block clubs %}
+    {% endblock clubs %}
+{% endblock body %}

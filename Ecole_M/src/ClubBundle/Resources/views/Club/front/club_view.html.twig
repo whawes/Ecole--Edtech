@@ -1,0 +1,34 @@
+{% extends 'Front/front.base.html.twig' %}
+
+{% block title %}Page Parent{% endblock %}
+
+{% block base %}
+
+    <h1>Our Clubs</h1>
+
+
+    <table class="table table-data2">
+        <thead>
+        <tr>
+            <th>Nom du club</th>
+            <th>Responsable du club</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="tr-shadow">
+        <tr class="spacer"></tr>
+
+        {% for c in clubs %}
+
+            <tr>
+                <td class="main-content">{{  c.nomclub  }}</td>
+
+                <td class="main-content">{{  c.User }}</td>
+            </tr>
+
+        {% endfor %}
+
+        <tr class="spacer"></tr>
+        </tbody>
+    </table>
+{% endblock %}

@@ -10,4 +10,10 @@ namespace ClubBundle\Repository;
  */
 class ClubRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function FindENS()
+    {
+        $dqlresult=$this->getEntityManager()
+            ->createQuery("select m from AppBundle:User m where m.roles = 'a:1:{i:0;s:15:\"ROLE_ENSEIGNANT\";}' ");
+        return $dqlresult->getResult();
+    }
 }

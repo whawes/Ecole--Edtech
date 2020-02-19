@@ -1,0 +1,36 @@
+{% extends 'Front/front.base.html.twig' %}
+
+{% block title %}Page Parent{% endblock %}
+
+{% block base %}
+
+    <h1>Our Events</h1>
+
+
+
+    <table class="table table-data2">
+        <thead>
+        <tr>
+            <th>Nom de l'evenement</th>
+            <th>Club Organisé</th>
+            <th>Responsable</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="tr-shadow">
+        <tr class="spacer"></tr>
+
+        {% for c in Evenement %}
+            <tr class="tr-shadow">
+
+                <td class="main-content">{{  c.nomEvenement  }}</td>
+                <td class="main-content">{{  c.heureDebut|date }}</td>
+                <td class="main-content">{{  c.heureFin|date }}</td>
+                <td class="main-content">{{  c.Club.nomclub }}</td>
+            </tr>
+        {% endfor %}
+
+        <tr class="spacer"></tr>
+        </tbody>
+    </table>
+{% endblock %}

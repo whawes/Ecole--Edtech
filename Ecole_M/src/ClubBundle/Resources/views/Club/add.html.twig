@@ -1,0 +1,81 @@
+{% extends "base.html.twig" %}
+{% block title %}Gestion Clubs{% endblock %}
+
+{% block body %}
+
+    {% block stylesheets %}
+        {{ parent() }}
+    {% endblock stylesheets %}
+
+    {% block header %}
+        {{ parent() }}
+    {% endblock header %}
+
+    {% block sideBar %}
+        {{ parent() }}
+    {% endblock  sideBar %}
+
+    {% block container %}
+        {{ parent() }}
+    {% endblock container %}
+
+
+    <div class="main-content">
+        <h1>Create Your Club</h1>
+        <br/>
+        <div class="col-md-12">
+            {{ form_start(form) }}
+
+            <div class="table-data__tool">
+                <div class="table-data__tool-left">
+
+
+                    <h3 class="title-5 m-b-35">Club Name:</h3>
+                    {{ form_widget(form.nomclub, { 'attr': {'class': "size20",'placeholder': "nom club"} }) }}
+                    {{ form_widget(form.User, { 'attr': {'size':"1",'class': ""} }) }}
+                </div>
+
+                <div class="table-data__tool-right">
+                    <br/>
+                    <br/>
+                    <button class="au-btn au-btn-icon au-btn--green au-btn--small" type="submit">Create Club</button>
+                </div>
+            </div>
+            {{ form_end(form) }}
+
+            <div class="table-responsive table-responsive-data2">
+                <table class="table table-data2">
+                    <thead>
+                    <tr>
+                        <th>Nom du club</th>
+                        <th>Responsable du club</th>
+                        <th colspan="2 ">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="tr-shadow">
+                    <tr class="spacer"></tr>
+
+                    {% for c in club %}
+                        <tr class="tr-shadow">
+
+                            <td class="main-content">{{ c.nomclub }}</td>
+                            <td class="main-content">{{ c.user }}</td>
+                            <td><a href="{{ path('update',{"id":c.id}) }}">update <i class="zmdi zmdi-edit"></i></a>
+                            </td>
+                            <td class="main-content"><a href="{{ path('delete',{"id":c.id}) }}">delete <i
+                                            class="zmdi zmdi-delete"></i></a></td>
+                        </tr>
+
+                    {% endfor %}
+
+                    <tr class="spacer"></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {% block clubs %}
+    {% endblock clubs %}
+{% endblock body %}
