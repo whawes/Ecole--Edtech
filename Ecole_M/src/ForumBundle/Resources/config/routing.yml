@@ -1,0 +1,37 @@
+homepage:
+    path:     /
+    defaults: { _controller: AppBundle:Default:index }
+forum_sujet:
+    path:     /forum/
+    defaults: { _controller: ForumBundle:Sujet:index }
+supprimer:
+    path:     /forumm/{id}
+    defaults: { _controller: ForumBundle:Sujet:supprimer }
+supprimer_commentaire:
+    path:     /forummm/{id}
+    defaults: { _controller: ForumBundle:Commentaire:supprimer }
+
+back_sujet:
+    path:     /backF/
+    defaults: { _controller: ForumBundle:Sujet:indexB }
+back_commentaire:
+    path:     /backF/commentaire/{id}
+    defaults: { _controller: ForumBundle:Commentaire:index }
+supprimerBack:
+    path:     /backF/forummm/{id}
+    defaults: { _controller: ForumBundle:Sujet:supprimerB }
+supprimerBackcommentaire:
+    path:     /backF/comm/{id}
+    defaults: { _controller: ForumBundle:Commentaire:supprimerB }
+like:
+    path:     /like/{id}
+    defaults: { _controller: ForumBundle:Likes:new }
+likeshow:
+    path:     /likeshow/{id}
+    defaults: { _controller: ForumBundle:Likes:newshow }
+dislike:
+    path:     /dislike/{id}
+    defaults: { _controller: ForumBundle:Likes:supprimer }
+dislikeshow:
+    path:     /dislikeshow/{id}
+    defaults: { _controller: ForumBundle:Likes:supprimershow }
