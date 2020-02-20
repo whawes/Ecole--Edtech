@@ -49,6 +49,7 @@
                     <tr>
                         <th>Nom du club</th>
                         <th>Responsable du club</th>
+                        <th>LOGO </th>
                         <th colspan="2 ">Action</th>
                     </tr>
                     </thead>
@@ -61,6 +62,7 @@
 
                             <td class="main-content">{{ c.nomclub }}</td>
                             <td class="main-content">{{ c.user }}</td>
+                            <td><img src="{{ asset('images/') }}{{ c.nomImage }}" style="width: 50px;height: 50px"></td>
                             <td><a href="{{ path('update',{"id":c.id}) }}">update <i class="zmdi zmdi-edit"></i></a>
                             </td>
                             <td class="main-content"><a href="{{ path('delete',{"id":c.id}) }}">delete <i
@@ -72,6 +74,10 @@
                     <tr class="spacer"></tr>
                     </tbody>
                 </table>
+                {# display navigation #}
+                <div class="navigation">
+                    {{ knp_pagination_render(club) }}
+                </div>
             </div>
         </div>
     </div>

@@ -49,6 +49,10 @@
                        </td><td>
                 <label class="title-5 m-b-35">Date et heure de la fin:</label>
                 {{ form_widget(form.heureFin) }}
+                       </td>
+                       <td>
+                           <label class="title-5 m-b-35">choisir un fichier</label>
+                           {{ form_widget(form.file) }}
                        </td></tr>
                 <tr><td colspan="2">
                     <br/><br/>
@@ -92,6 +96,8 @@
                         <td class="main-content">{{  c.heureDebut|date }}</td>
                         <td class="main-content">{{  c.heureFin|date }}</td>
                         <td class="main-content">{{  c.Club.nomclub }}</td>
+                        <td><img src="{{ asset('images/') }}{{ c.nomImage }}" style="width: 50px;height: 50px"></td>
+
                         <td class="main-content" > <a href="{{ path('updateEvent',{"id":c.id}) }}">update <i class="zmdi zmdi-edit"></i></a></td>
 
                         <td><a href="{{ path('deleteEvent',{"id":c.id}) }}">delete <i class="zmdi zmdi-delete"></i></a></td>
@@ -102,6 +108,10 @@
                 <tr class="spacer"></tr>
                 </tbody>
             </table>
+            {# display navigation #}
+            <div class="navigation">
+                {{ knp_pagination_render(Evenement) }}
+            </div>
         </div>
     </div>
 </div>

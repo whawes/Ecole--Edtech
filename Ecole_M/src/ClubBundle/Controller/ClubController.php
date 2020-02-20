@@ -5,6 +5,7 @@ namespace ClubBundle\Controller;
 use AppBundle\Entity\User;
 use ClubBundle\Entity\Club;
 use ClubBundle\Form\ClubType;
+use Knp\Component\Pager\Paginator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -28,11 +29,25 @@ class ClubController extends Controller
         $em = $this->getDoctrine()->getManager();
         $clubx = $em->getRepository("ClubBundle:Club")->findAll();
 
+
+        /**
+         * @var $paginator Paginator
+         */
+        $paginator = $this->get('knp_paginator');
+
+        dump(get_class($paginator));
+        $re=$paginator->paginate(
+            $clubx,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit',2));
+
+
         $club = new Club();
         $form = $this->createForm(ClubType::class, $club);
         $form->handleRequest($request);
         //  $club->setSujet(null);
         if ($form->isSubmitted()) {
+            $club->uploadProfilePicture();
             $em->persist($club);
             $em->flush();
             return $this->redirectToRoute("add");
@@ -41,14 +56,24 @@ class ClubController extends Controller
             'form' => $form->createView(),
             //'users'=>$users,
             'userconecter' => $this->getUserr(),
-            "club" => $clubx
+            "club" => $re
         ));
     }
 
-    public function front_view_clubsAction()
+    public function front_view_clubsAction(Request $request)
     {
         $r=$this->getDoctrine()->getRepository(Club::class)->findAll();
-        return $this->render('@Club/Club/front/club_view.html.twig', array("clubs"=>$r));
+        /**
+         * @var $paginator Paginator
+         */
+        $paginator = $this->get('knp_paginator');
+
+        dump(get_class($paginator));
+        $re=$paginator->paginate(
+            $r,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit',2));
+        return $this->render('@Club/Club/front/club_view.html.twig', array("clubs"=>$re));
     }
 
     public function front_home_pageAction()
@@ -76,7 +101,17 @@ class ClubController extends Controller
     {
 
         $em = $this->getDoctrine()->getManager();
-        $club = $em->getRepository("ClubBundle:Club")->findAll();
+       // $club = $em->getRepository("ClubBundle:Club")->findAll();
+        $dql   = "SELECT a FROM ClubBundle:Club a";
+        $query = $em->createQuery($dql);
+
+        $paginator = $this->get('knp_paginator');
+        $result = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 0),
+            $request->query->getInt('limit',2)
+);
+
         return $this->render('?', array("club" => $club));
     }
 

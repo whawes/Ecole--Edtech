@@ -23,7 +23,8 @@ class EvenementType extends AbstractType
             'choice_label' => 'nomclub',
             'multiple' => false,
             'expanded' => false
-        ]);;
+        ])
+            ->add('file');
     }/**
      * {@inheritdoc}
      */

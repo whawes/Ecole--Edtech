@@ -3,6 +3,7 @@
 namespace ClubBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Evenement
@@ -23,7 +24,7 @@ class Evenement
 
     /**
      * @ORM\ManyToOne(targetEntity="ClubBundle\Entity\Club")
-     * @ORM\JoinColumn(referencedColumnName="id")
+     * @ORM\JoinColumn(referencedColumnName="id" ,onDelete="CASCADE")
      */
 
     private $Club;
@@ -32,15 +33,25 @@ class Evenement
      * @var string
      *
      * @ORM\Column(name="nom_evenement", type="string", length=255)
+     *
+     * @Assert\NotBlank()
+     *
      */
     private $nomEvenement;
-
-
+    /**
+     * @ORM\Column(type="string",length=255,nullable=true)
+     */
+    public $nomImage;
+    /**
+     * @Assert\File(maxSize="5000k")
+     */
+    public $file;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="heure_debut", type="datetime")
+     *
      */
     private $heureDebut;
 
@@ -48,6 +59,8 @@ class Evenement
      * @var \DateTime
      *
      * @ORM\Column(name="heure_fin", type="datetime")
+     * @Assert\GreaterThan(propertyPath="heureDebut")
+     *
      */
     private $heureFin;
 
@@ -78,14 +91,12 @@ class Evenement
 
     /**
      * Get nomEvenement
-     *
      * @return string
      */
     public function getNomEvenement()
     {
         return $this->nomEvenement;
     }
-
 
 
     /**
@@ -158,5 +169,50 @@ class Evenement
     public function getClub()
     {
         return $this->Club;
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->nomImage ? null : $this->getUploadDir . '/' . $this->nomImage;
+    }
+
+    protected function getUploadRootDir()
+    {
+        return __DIR__ . '/../../../web/' . $this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        return 'images';
+    }
+
+    public function uploadProfilePicture()
+    {
+        $this->file->move($this->getUploadRootDir(), $this->file->getClientOriginalName());
+        $this->nomImage = $this->file->getClientOriginalName();
+        $this->file = null;
+    }
+
+    /**
+     * Set nomImage
+     *
+     * @param string $nomImage
+     *
+     * @return Club
+     */
+    public function setNomImage($nomImage)
+    {
+        $this . $this->nomImage == $nomImage;
+        return $this;
+    }
+
+    /**
+     * Get NomImage
+     *
+     * @return string
+     */
+    public function getNomImage()
+    {
+        return $this->nomImage;
     }
 }

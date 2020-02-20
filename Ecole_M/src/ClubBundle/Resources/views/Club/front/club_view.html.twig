@@ -8,27 +8,34 @@
 
 
     <table class="table table-data2">
+        <section class="col-sm-12 maincontent" style="border-style: groove">
         <thead>
-        <tr>
+        <tr class="row">
             <th>Nom du club</th>
             <th>Responsable du club</th>
+            <th >Club </th>
         </tr>
         </thead>
+        </section>
         <tbody>
-        <tr class="tr-shadow">
-        <tr class="spacer"></tr>
 
         {% for c in clubs %}
 
-            <tr>
+            <tr class="row">
                 <td class="main-content">{{  c.nomclub  }}</td>
-
                 <td class="main-content">{{  c.User }}</td>
+                <td><img src="{{ asset('images/') }}{{ c.nomImage }}" style="width: 50px;height: 50px"/></td>
+
             </tr>
 
         {% endfor %}
 
         <tr class="spacer"></tr>
         </tbody>
+        </section>
     </table>
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(clubs) }}
+    </div>
 {% endblock %}
