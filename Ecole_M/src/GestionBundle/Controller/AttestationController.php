@@ -7,6 +7,7 @@ use GestionBundle\Entity\Reclamation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use UserBundle\Entity\User;
 
 /**
  * Attestation controller.
@@ -127,10 +128,52 @@ class AttestationController extends Controller
     {
         $c=$this->getDoctrine()->getRepository(Attestation::class)->find($id);
         $en=$this->getDoctrine()->getManager();
+        $c->setEtat("traitee");
+        $en->remove($c);
+        $en->flush();return $this->redirectToRoute('attestation_index');
+    }
+
+    public function traiterAction($id)
+    {
+        $c=$this->getDoctrine()->getRepository(Attestation::class)->find($id);
+        $user=$this->getDoctrine()->getRepository(User::class)->find($c->getIduser());
+        $en=$this->getDoctrine()->getManager();
+        $c->setEtat("traitee");
+        $en->persist($c);
+        $en->flush();
+
+        $username='topisland123@gmail.com';
+        $message= \Swift_Message::newInstance()
+            ->setSubject('Attestation')
+            ->setFrom($username)
+            ->setTo($user->getEmail())
+            ->setBody('Votre attestation a été traitée');
+        $this->get('mailer')->send($message);
+
+
+        return $this->redirectToRoute('consulter_attestation');
+    }
+
+    public function indexadminAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $attestations = $em->getRepository('GestionBundle:Attestation')->findAll();
+
+        return $this->render('attestation/adminconsulter.html.twig', array(
+            'attestations' => $attestations,
+        ));
+    }
+
+    public function adminsupprimerAction($id)
+    {
+        $c=$this->getDoctrine()->getRepository(Attestation::class)->find($id);
+        $en=$this->getDoctrine()->getManager();
         $en->remove($c);
         $en->flush();
-        return $this->redirectToRoute('attestation_index');
+        return $this->redirectToRoute('consulter_attestation');
     }
+
 
     /**
      * Creates a form to delete a attestation entity.

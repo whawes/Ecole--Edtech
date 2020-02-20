@@ -2,11 +2,13 @@
 
 namespace GestionBundle\Controller;
 
+use GestionBundle\Entity\Attestation;
 use GestionBundle\Entity\Permutation;
 use GestionBundle\Entity\Reclamation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use UserBundle\Entity\User;
 
 /**
  * Permutation controller.
@@ -129,6 +131,46 @@ class PermutationController extends Controller
         $en->remove($c);
         $en->flush();
         return $this->redirectToRoute('permutation_index');
+    }
+
+    public function indexadminAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $permutations = $em->getRepository('GestionBundle:Permutation')->findAll();
+
+        return $this->render('permutation/adminconsulter.html.twig', array(
+            'permutations' => $permutations,
+        ));
+    }
+
+    public function adminsupprimerAction($id)
+    {
+        $c=$this->getDoctrine()->getRepository(Permutation::class)->find($id);
+        $en=$this->getDoctrine()->getManager();
+        $en->remove($c);
+        $en->flush();
+        return $this->redirectToRoute('consulter_permutation');
+    }
+
+    public function traiterAction($id)
+    {
+        $c=$this->getDoctrine()->getRepository(Permutation::class)->find($id);
+        $user=$this->getDoctrine()->getRepository(User::class)->find($c->getIduser());
+        $en=$this->getDoctrine()->getManager();
+        $c->setEtat("traitee");
+        $en->persist($c);
+        $en->flush();
+
+        $username='topisland123@gmail.com';
+        $message= \Swift_Message::newInstance()
+            ->setSubject('Permutation')
+            ->setFrom($username)
+            ->setTo($user->getEmail())
+            ->setBody('Votre demande de permutation a été traitée');
+        $this->get('mailer')->send($message);
+
+        return $this->redirectToRoute('consulter_permutation');
     }
 
     /**
