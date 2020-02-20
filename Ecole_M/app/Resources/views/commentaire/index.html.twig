@@ -21,7 +21,8 @@
         <div class="col-md-12" style="margin-top: 120px">
             <a style="float: right; margin-right: 200px" href="{{ path('sujet_index_back') }}">Back to the list</a>
             <!-- DATA TABLE -->
-            <h3 class="title-5 m-b-35">Sujet {{sujet.id}}</h3>
+            <h3 class="title-5 m-b-35">Sujet {{sujet.id}} - {{ sujet.titre }}</h3>
+            <h4 class="title-5 m-b-35">{{sujet.description}}</h4>
             <div class="table-responsive table-responsive-data2">
                 <table class="table table-data2">
                     <thead>

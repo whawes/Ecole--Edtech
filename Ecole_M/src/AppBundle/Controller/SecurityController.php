@@ -30,13 +30,10 @@ class SecurityController extends Controller
     public function redirectAction()
     {
         $authCheker =$this->container->get('security.authorization_checker');
-        if($authCheker->isGranted('ROLE_ADMIN')){return $this->render('@App/Security/admin_home.html.twig');}
-        else if ($authCheker->isGranted('ROLE_PARENT'))
-        {return $this->render('@App/Security/parent_home.html.twig');}
-        else if ($authCheker->isGranted('ROLE_ENSEIGNANT'))
-        {return $this->render('@App/Security/enseignant_home.html.twig');}
-
-        else {return $this->render('@FOSUser/Security/login.html.twig');}
+        if($authCheker->isGranted('ROLE_ADMIN')){return $this->redirectToRoute('back_sujet');}
+        else if ($authCheker->isGranted('ROLE_Agent'))
+        {return $this->redirectToRoute('edtech_homepage');}
+        else {return $this->redirectToRoute('edtech_homepage');}
 
     }
 

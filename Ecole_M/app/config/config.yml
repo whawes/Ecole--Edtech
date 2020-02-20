@@ -2,8 +2,9 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: "@ClubBundle/Resources/config/services.yml" }
     - { resource: "@UserBundle/Resources/config/services.yml" }
+    - { resource: "@EdtechBundle/Resources/config/services.yml" }
+    - { resource: "@ForumBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -11,16 +12,15 @@ parameters:
     locale: fr
 
 framework:
-    esi: ~
+    #esi: ~
     translator: { fallbacks: ['%locale%'] }
-
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
         strict_requirements: ~
     form: ~
     csrf_protection: ~
-    validation: { enable_annotations: true }
+    validation: { enabled:true, enable_annotations: true }
     #serializer: { enable_annotations: true }
     default_locale: '%locale%'
     trusted_hosts: ~
@@ -73,15 +73,16 @@ sensio_framework_extra:
    router:
         annotations: false
 
-
-# app/config/config.yml
 fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     firewall_name: main
-    user_class: UserBundle\Entity\User
-    service:                               # this lines
+    user_class: AppBundle\Entity\User
+    service:
         mailer: fos_user.mailer.twig_swift
     from_email:
-        address: "oussmah256@gmail.com"
-        sender_name: "ADMIN"
-
+        address: "wafa.haoues@esprit.tn"
+        sender_name: "boof"
+fos_message:
+    db_driver: orm
+    thread_class: AppBundle\Entity\Thread
+    message_class: AppBundle\Entity\Message
