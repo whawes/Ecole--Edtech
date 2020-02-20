@@ -2,10 +2,12 @@
 
 namespace GestionBundle\Controller;
 
+use GestionBundle\Entity\Attestation;
 use GestionBundle\Entity\Reclamation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use UserBundle\Entity\User;
 
 /**
  * Reclamation controller.
@@ -36,7 +38,7 @@ class ReclamationController extends Controller
 
         $reclamations = $em->getRepository('GestionBundle:Reclamation')->findAll();
 
-        return $this->render('reclamation/admin_home.html.twig', array(
+        return $this->render('reclamation/adminconsulter.html.twig', array(
             'reclamations' => $reclamations,
         ));
     }
@@ -139,6 +141,35 @@ class ReclamationController extends Controller
         $en->remove($c);
         $en->flush();
         return $this->redirectToRoute('reclamation_index');
+    }
+
+    public function adminsupprimerAction($id)
+    {
+        $c=$this->getDoctrine()->getRepository(Reclamation::class)->find($id);
+        $en=$this->getDoctrine()->getManager();
+        $en->remove($c);
+        $en->flush();
+        return $this->redirectToRoute('consulter_reclamation');
+    }
+
+    public function traiterAction($id)
+    {
+        $c=$this->getDoctrine()->getRepository(Reclamation::class)->find($id);
+        $user=$this->getDoctrine()->getRepository(User::class)->find($c->getIduser());
+        $en=$this->getDoctrine()->getManager();
+        $c->setEtat("traitee");
+        $en->persist($c);
+        $en->flush();
+
+        $username='topisland123@gmail.com';
+        $message= \Swift_Message::newInstance()
+            ->setSubject('Réclamation')
+            ->setFrom($username)
+            ->setTo($user->getEmail())
+            ->setBody('Votre réclamation a été traitée');
+        $this->get('mailer')->send($message);
+
+        return $this->redirectToRoute('consulter_reclamation');
     }
 
     /**
