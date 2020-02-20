@@ -10,7 +10,9 @@ supprimer:
 supprimer_commentaire:
     path:     /forummm/{id}
     defaults: { _controller: ForumBundle:Commentaire:supprimer }
-
+message_3bed:
+    path:     /ad
+    defaults: { _controller: AppBundle:default:message }
 back_sujet:
     path:     /backF/
     defaults: { _controller: ForumBundle:Sujet:indexB }
@@ -35,3 +37,18 @@ dislike:
 dislikeshow:
     path:     /dislikeshow/{id}
     defaults: { _controller: ForumBundle:Likes:supprimershow }
+signaler_sujet:
+    path:     /signaleer/{id}
+    defaults: { _controller: ForumBundle:Signaler:new }
+signaler_commentaire:
+    path:     /signaleeer/{id}
+    defaults: { _controller: ForumBundle:Signaler:newcomm }
+back_signaler:
+    path:     /backF/signaler/
+    defaults: { _controller: ForumBundle:Signaler:index }
+back_signalersupp:
+    path:     /backF/signalersupp/{id}
+    defaults: { _controller: ForumBundle:Signaler:supprimer }
+back_signalersuppall:
+    path:     /backF/signalersuppall/{id}
+    defaults: { _controller: ForumBundle:Signaler:supprimertous }

@@ -1,89 +1,82 @@
 <?php
 
+//src/AppBundle/Entity/User.php
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
+use FOS\MessageBundle\Model\ParticipantInterface;
 use Doctrine\ORM\Mapping as ORM;
+use EdtechBundle\Entity\course;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="fos_user")
+  *@ORM\Entity
+  *@ORM\Table(name = "fos_user")
  */
-class User extends BaseUser
+class User extends BaseUser implements ParticipantInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
+	    /**
+	     * @ORM\Id
+	     * @ORM\Column(type="integer")
+	   ss  * @ORM\GeneratedValue(strategy="AUTO")
+	     */
+	    protected $id;
 
     /**
-     * @ORM\Column(type="string",length=255)
+     * @ORM\Column(type="string",length=225)
+     *
      */
     protected $nom;
-
-
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
-     * @ORM\JoinColumn(name="parent_id",referencedColumnName="id", nullable=true)
+     * @ORM\Column(type="integer")
+     *
      */
-    private $parent;
-
-    /**
-     * @return mixed
+    protected $TypeIntelligence;
+  /*  /**
+     * @ORM\Column(type="integer")
+     * @ORM\OneToMany(targetEntity="EdtechBundle\Entity\course", mappedBy="niveau")
+     *
      */
-    public function getClasse()
-    {
-        return $this->classe;
-    }
-
-    /**
-     * @param mixed $classe
-     */
-    public function setClasse($classe)
-    {
-        $this->classe = $classe;
-    }
+ /*   protected $niveau;*/
 
     /**
      * @return mixed
      */
-    public function getParent()
+
+    public function getTypeIntelligence()
     {
-        return $this->parent;
+        return $this->TypeIntelligence;
     }
 
     /**
-     * @param mixed $parent
+     * @param mixed $TypeIntelligence
      */
-    public function setParent($parent)
+    public function setTypeIntelligence($TypeIntelligence)
     {
-        $this->parent = $parent;
+        $this->TypeIntelligence = $TypeIntelligence;
     }
 
     /**
-     * @ORM\ManyToOne(targetEntity="ScolariteBundle\Entity\Classe")
-     * @ORM\JoinColumn(name="classe_id",referencedColumnName="id", nullable=true)
+     * @ORM\OneToMany(targetEntity="EdtechBundle\Entity\course" ,mappedBy="user")
      */
+    protected $courses;
 
-    private $classe;
-    /**
+  /*  /**
      * @return mixed
      */
-    public function getId()
+   /* public function getNiveau()
     {
-        return $this->id;
+        return $this->niveau;
     }
 
     /**
-     * @param mixed $id
+     * @param mixed $niveau
      */
-    public function setId($id)
+ /*   public function setNiveau($niveau)
     {
-        $this->id = $id;
-    }
+        $this->niveau = $niveau;
+    }*/
 
     /**
      * @return mixed
@@ -102,12 +95,6 @@ class User extends BaseUser
     }
 
     /**
-     * @ORM\Column(type="string",length=255)
-     */
-
-    protected $prenom;
-
-    /**
      * @return mixed
      */
     public function getPrenom()
@@ -122,9 +109,51 @@ class User extends BaseUser
     {
         $this->prenom = $prenom;
     }
-    public function __construct()
-    {
-        parent::__construct();
 
+    /**
+     * @ORM\Column(type="string",length=225)
+     *
+     */
+    protected $prenom;
+
+	    public function __construct()
+	    {
+	        parent::__construct();
+	        $this-> courses = new ArrayCollection();
+
+	    }
+      
+    /**
+     * Add course
+     *
+     * @param \EdtechBundle\Entity\course $course
+     *
+     * @return User
+     */
+    public function addCourse(\EdtechBundle\Entity\course $course)
+    {
+        $this->courses[] = $course;
+
+        return $this;
+    }
+
+    /**
+     * Remove course
+     *
+     * @param \EdtechBundle\Entity\course $course
+     */
+    public function removeCourse(\EdtechBundle\Entity\course $course)
+    {
+        $this->courses->removeElement($course);
+    }
+
+    /**
+     * Get courses
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCourses()
+    {
+        return $this->courses;
     }
 }

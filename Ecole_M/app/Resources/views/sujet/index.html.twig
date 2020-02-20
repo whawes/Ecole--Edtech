@@ -29,26 +29,30 @@
                             {% set break = false %}
                             {% for a in aa if not break%}
                                 {% if sujet.id==a.sujet.id %}
-                                    <a href="{{ path('dislike', { 'id': sujet.id }) }}"><button style="background-color: white"><i class="fa fa-thumbs-up"></i></button></a> {{ sujet.score }}
+                                    <a href="{{ path('dislike', { 'id': sujet.id }) }}"><button class="btn btn-dark" style="padding: 4px 10px;background-color: orangered;"><i class="fa fa-thumbs-up"></i></button></a> <span style="font-weight: bold">{{ sujet.score }}</span>
                                     {% set break = true %}
                                 {% endif %}
                                 {% if sujet.id!=a.sujet.id  %}
-                                    <a href="{{ path('like', { 'id': sujet.id }) }}"><button style="background-color: white"><i class="fa fa-thumbs-o-up"></i></button></a> {{ sujet.score }}
+                                    <a href="{{ path('like', { 'id': sujet.id }) }}"><button class="btn btn-dark" style="padding: 4px 10px;background-color: lightskyblue;"><i class="fa fa-thumbs-o-up"></i></button></a> <span style="font-weight: bold">{{ sujet.score }}</span>
                                     {% set break = true %}
                                 {% endif %}
                             {% endfor %}
                             {% if aa is empty %}
-                            <a href="{{ path('like', { 'id': sujet.id }) }}"><button style="background-color: white"><i class="fa fa-thumbs-o-up"></i></button></a> {{ sujet.score }}
+                            <a href="{{ path('like', { 'id': sujet.id }) }}"><button class="btn btn-dark" style="padding: 4px 10px;background-color: lightskyblue;"><i class="fa fa-thumbs-o-up"></i></button></a> <span style="font-weight: bold">{{ sujet.score }}</span>
                             {% endif %}
 
 
 
-                            <a href="{{ path('sujet_show', { 'id': sujet.id }) }}"><button style="background-color: white">comment <i class="fa fa-comment"></i></button></a>
+                            <a href="{{ path('sujet_show', { 'id': sujet.id }) }}"><button class="btn btn-dark" style="padding: 4px 10px;background-color: lightskyblue;"><i class="fa fa-comment"></i></button></a>
 
                             {% if app.user.id==sujet.createur  %}
-                                <a href="{{ path('sujet_edit', { 'id': sujet.id }) }}"><button style="background-color: white">edit</button></a>
-                                <a href="{{ path('supprimer', { 'id': sujet.id }) }}"><button style="background-color: white">delete</button></a>
+                                <a href="{{ path('sujet_edit', { 'id': sujet.id }) }}"><button class="btn btn-dark" style="padding: 4px 10px;background-color: lightskyblue;"><i class="fa fa-pencil-square"> </i></button></a>
+                                <a href="{{ path('supprimer', { 'id': sujet.id }) }}"><button class="btn btn-dark" style="padding: 4px 10px;background-color: lightskyblue;"><i class="fa fa-trash-o"> </i></button></a>
+                            {% else %}
+                                <a href="{{ path('signaler_sujet', { 'id': sujet.id }) }}"><button class="btn btn-dark" style="padding: 4px 10px;background-color: lightskyblue;"><i class="fa fa-exclamation-triangle"> </i></button></a>
                             {% endif %}
+
+
                         </div>
 
                     </section>

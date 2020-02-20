@@ -1,13 +1,50 @@
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+forum_signaler:
+    resource: "@ForumBundle/Controller/SignalerController.php"
+    type:     annotation
+
+forum_likes:
+    resource: "@ForumBundle/Controller/LikesController.php"
+    type:     annotation
+
+forum_commentaire:
+    resource: "@ForumBundle/Controller/CommentaireController.php"
+    type:     annotation
+
+forum_sujet:
+    resource: "@ForumBundle/Controller/SujetController.php"
+    type:     annotation
+
+forum:
+    resource: "@ForumBundle/Resources/config/routing.yml"
+    prefix:   /
+
+edtech_test:
+    resource: "@EdtechBundle/Controller/testController.php"
+    type:     annotation
+
+edtech_course:
+    resource: "@EdtechBundle/Controller/courseController.php"
+    type:     annotation
+
+edtech:
+    resource: "@EdtechBundle/Resources/config/routing.yml"
+    prefix:   /
+
 user:
     resource: "@UserBundle/Resources/config/routing.yml"
     prefix:   /
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
-
-club:
-    resource: "@ClubBundle/Resources/config/routing.yml"
+edtech_user:
+    resource: "@AppBundle/Resources/config/routing.yml"
     prefix:   /
+
+fos_message:
+    resource: "@FOSMessageBundle/Resources/config/routing.xml"
+    prefix: /message

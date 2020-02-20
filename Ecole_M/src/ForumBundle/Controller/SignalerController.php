@@ -154,11 +154,19 @@ class SignalerController extends Controller
     {
         $en=$this->getDoctrine()->getManager();
         $aaa = $en->getRepository(Signaler::class)->find($id);
-
+        if($aaa->getSujet()!=null)
+        {
         $aa = $en->getRepository(Sujet::class)->find($aaa->getSujet());
         $dza=$en->getRepository(Commentaire::class)->findbyfa($aa);
         $s=$this->getDoctrine()->getRepository(Sujet::class)->find($id);
         $en->remove($aa);
+        }
+        else
+        {
+            $dza=$en->getRepository(Commentaire::class)->find($aaa->getCommentaire());
+            $en->remove($dza);
+        }
+
         $en->remove($aaa);
         $en->flush();
         return $this->redirectToRoute('signaler_index');

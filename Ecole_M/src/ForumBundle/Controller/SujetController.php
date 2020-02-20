@@ -4,6 +4,7 @@ namespace ForumBundle\Controller;
 
 use ForumBundle\Entity\Commentaire;
 use ForumBundle\Entity\Likes;
+use ForumBundle\Entity\Signaler;
 use ForumBundle\Entity\Sujet;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -183,7 +184,9 @@ class SujetController extends Controller
         $aa = $en->getRepository(Sujet::class)->find($id);
         $dza=$en->getRepository(Commentaire::class)->findbyfa($aa);
         $s=$this->getDoctrine()->getRepository(Sujet::class)->find($id);
+        $ss = $en->getRepository(Signaler::class)->findOneBy(array("sujet"=>$s));
         $en->remove($s);
+        $en->remove($ss);
         $en->flush();
         return $this->redirectToRoute('sujet_index');
     }
