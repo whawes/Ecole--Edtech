@@ -93,10 +93,33 @@ class Matiere
         return $this->nbH;
     }
 
+
+    /**
+     * @ORM\OneToMany(targetEntity="Moyennes", mappedBy="matiere")
+     */
+    private $moyennes;
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getMoyennes()
+    {
+        return $this->moyennes;
+    }
+
+    /**
+     * @param ArrayCollection $moyennes
+     */
+    public function setMoyennes($moyennes)
+    {
+        $this->moyennes = $moyennes;
+    }
+
     /**
      * @ORM\OneToMany(targetEntity="Notes", mappedBy="matiere")
      */
     private $notes;
+
 
     /**
      * @return ArrayCollection
@@ -117,6 +140,7 @@ class Matiere
     public function __construct()
     {
         $this->notes = new ArrayCollection();
+        $this->moyennes= new ArrayCollection();
     }
 
     public  function __toString()

@@ -143,7 +143,6 @@ class Classe
 
     public function __construct()
     {
-        parent::__construct();
         $this->eleves = new ArrayCollection();
         $this->enseignants = new ArrayCollection();
     }

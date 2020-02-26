@@ -21,6 +21,7 @@
                 <th scope="col">Email</th>
                 <th scope="col">ID Classe</th>
                 <th scope="col">Niveau</th>
+                <th scope="col">Moyennes</th>
                 <th scope="col">Notes</th>
                 <th scope="col">Absences</th>
                 <th scope="col">Sanctions</th>
@@ -33,6 +34,7 @@
                     <td>{{ eleve.email }}</td>
                     <td>{{ eleve.classedeseleves}}</td>
                     <td>{{ eleve.classedeseleves.niveau  }} {% if eleve.classedeseleves.niveau == 1 %}'ere annee {% else %}'eme annee {% endif %}</td>
+                    <td><a href="{{ path('user_moyennes', { 'id': eleve.id }) }}" class="btn btn-success" style="background: #1b5e20">Moyenne</a></td>
                     <td><a href="{{ path('user_notes', { 'id': eleve.id }) }}"  class="btn btn-primary" style="background: #3d84e6">Notes</a></td>
                     <td><a href="{{ path('user_absences', { 'id': eleve.id }) }}" style="background: #FF9B22" class="btn btn-warning">Absences</a></td>
                     <td><a href="{{ path('user_sanctions', { 'id': eleve.id }) }}" class="btn btn-danger" style="background: #c9302c">Sanctions</a></td>

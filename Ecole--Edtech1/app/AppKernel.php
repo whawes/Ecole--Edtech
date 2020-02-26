@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new EnseignantBundle\EnseignantBundle(),
             new UserBundle\UserBundle(),
             new ScolariteBundle\ScolariteBundle(),
+            new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

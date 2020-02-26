@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use UserBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 /**
  * Note controller.
  *
@@ -19,9 +20,16 @@ class NotesController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        $id=$user->getId();
 
-        $notes = $em->getRepository('EnseignantBundle:Notes')->findAll();
+        $repository = $this->getDoctrine()->getRepository(Notes::class);
+        $query = $repository->createQueryBuilder('n')
+            ->where('n.enseignant=:id')
+            ->setParameter('id', $id)
+            ->getQuery();
+        $notes = $query->getResult();
+
 
         return $this->render('notes/index.html.twig', array(
             'notes' => $notes,
@@ -35,10 +43,11 @@ class NotesController extends Controller
     public function newAction(Request $request)
     {
         $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        $classe=$user->getClasse();
         $note = new Notes();
         $note->setEnseignant($user);
 
-        $form = $this->createForm('EnseignantBundle\Form\NotesType', $note);
+        $form = $this->createForm('EnseignantBundle\Form\NotesType', $note, ['classe' => $classe]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -75,8 +84,10 @@ class NotesController extends Controller
      */
     public function editAction(Request $request, Notes $note)
     {
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        $classe=$user->getClasse();
         $deleteForm = $this->createDeleteForm($note);
-        $editForm = $this->createForm('EnseignantBundle\Form\NotesType', $note);
+        $editForm = $this->createForm('EnseignantBundle\Form\NotesType', $note, ['classe' => $classe]);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

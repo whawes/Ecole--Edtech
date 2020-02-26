@@ -12,7 +12,7 @@
         <link rel="favicon" href="{{ asset('front/assets/images/favicon.png')}}">
 
         {% block stylesheets %}
-            <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+            <link rel="stylesheet" media="screen" href="{{ asset('http://fonts.googleapis.com/css?family=Open+Sans:300,400,700') }}">
             <link rel="stylesheet" href="{{ asset('front/assets/css/bootstrap.min.css')}}">
             <link rel="stylesheet" href="{{ asset('front/assets/css/font-awesome.min.css')}}">
             <link rel="stylesheet" href="{{ asset('front/assets/css/bootstrap-theme.css')}}" media="screen">
@@ -39,7 +39,11 @@
                     <ul class="nav navbar-nav pull-right mainNav">
                         <li class="c1 active"><a href="{{ path('enseignant_homepage') }}">Home</a></li>
                         {% if is_granted('IS_AUTHENTICATED_FULLY')==true %}
-                        <li class="c2"><a href="{{ path('user_espaceparent') }}">Espace Parent</a></li>
+                             {% if is_granted('ROLE_ADMIN')==true %}
+                                  <li class="c2"><a href="{{ path('user_indexenseignant') }}">Espace Professeur</a></li>
+                             {% elseif is_granted('ROLE_USER')==true %}
+                                 <li class="c2"><a href="{{ path('user_espaceparent') }}">Espace Parent</a></li>
+                             {% endif %}
                         {% endif %}
                         <li class="c3"><a href="courses.html">Courses</a></li>
                         <li class="c4"><a href="price.html">Price</a></li>
@@ -380,7 +384,7 @@
                     playPause: false,
                     navigation: false,
                     opacityOnGrid: false,
-                    imagePath: 'front/assets/images/'
+                    imagePath: '/assets/images/'
                 });
 
             });

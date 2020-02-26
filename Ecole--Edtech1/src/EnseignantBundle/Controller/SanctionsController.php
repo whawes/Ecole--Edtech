@@ -34,10 +34,11 @@ class SanctionsController extends Controller
     public function newAction(Request $request)
     {
         $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        $classe=$user->getClasse();
         $sanction = new Sanctions();
         $sanction->setEnseignant($user);
         $sanction->setEtat(false);
-        $form = $this->createForm('EnseignantBundle\Form\SanctionsType', $sanction);
+        $form = $this->createForm('EnseignantBundle\Form\SanctionsType', $sanction, ['classe' => $classe]);
         $form->handleRequest($request);
 
         $user = $this->container->get('security.token_storage')->getToken()->getUser();
@@ -77,8 +78,10 @@ class SanctionsController extends Controller
      */
     public function editAction(Request $request, Sanctions $sanction)
     {
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        $classe=$user->getClasse();
         $deleteForm = $this->createDeleteForm($sanction);
-        $editForm = $this->createForm('EnseignantBundle\Form\SanctionsType', $sanction);
+        $editForm = $this->createForm('EnseignantBundle\Form\SanctionsType', $sanction, ['classe' => $classe]);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

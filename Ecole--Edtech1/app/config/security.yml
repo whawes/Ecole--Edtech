@@ -34,3 +34,4 @@ security:
         - { path: ^/notes, role: ROLE_ADMIN }
         - { path: ^/sanctions, role: ROLE_ADMIN }
         - { path: ^/absences, role: ROLE_ADMIN }
+        - { path: ^/moyennes, role: ROLE_ADMIN }

@@ -8,7 +8,6 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use UserBundle\UserBundle;
 
 class NotesType extends AbstractType
 {
@@ -17,7 +16,8 @@ class NotesType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('type', ChoiceType::class, [
+        $classe = $options['classe'];
+        $builder->add('Type', ChoiceType::class, [
             'choices'  => [
                 'CC' => 'CC',
                 'Devoir de controle' => 'Devoir de controle',
@@ -28,12 +28,12 @@ class NotesType extends AbstractType
                 '1' => 1,
                 '2' => 2,
                 '3' => 3,
-            ],
+            ]
         ])->add('matiere')->add('eleve', EntityType::class, [
-            'class' => 'AppBundle:User', 'query_builder' => function (EntityRepository $er) {
+            'class' => 'AppBundle:User', 'query_builder' => function (EntityRepository $er) use ($classe) {
                 return $er->createQueryBuilder('u')
-                    ->where('u.roles = :role')
-                    ->setParameter('role', 'a:1:{i:0;s:10:"ROLE_ELEVE";}');
+                    ->where('u.roles = :role')->andWhere('u.classedeseleves= :classe')
+                    ->setParameter('role', 'a:1:{i:0;s:10:"ROLE_ELEVE";}')->setParameter('classe', $classe);
             }]);
     }/**
      * {@inheritdoc}
@@ -43,6 +43,7 @@ class NotesType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'EnseignantBundle\Entity\Notes'
         ));
+        $resolver->setRequired(['classe',]);
     }
 
     /**

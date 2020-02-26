@@ -34,11 +34,12 @@ class AbsencesController extends Controller
     public function newAction(Request $request)
     {
         $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        $classe=$user->getClasse();
         $absence = new Absences();
         $absence->setEnseignant($user);
         $absence->setEtat(false);
         $absence->setJustification("a ajouter");
-        $form = $this->createForm('EnseignantBundle\Form\AbsencesType', $absence);
+        $form = $this->createForm('EnseignantBundle\Form\AbsencesType', $absence, ['classe' => $classe]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -75,8 +76,10 @@ class AbsencesController extends Controller
      */
     public function editAction(Request $request, Absences $absence)
     {
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        $classe=$user->getClasse();
         $deleteForm = $this->createDeleteForm($absence);
-        $editForm = $this->createForm('EnseignantBundle\Form\AbsencesType', $absence);
+        $editForm = $this->createForm('EnseignantBundle\Form\AbsencesType', $absence, ['classe' => $classe]);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

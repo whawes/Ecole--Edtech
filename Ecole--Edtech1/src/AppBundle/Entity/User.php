@@ -42,10 +42,15 @@ class User extends BaseUser
     private $nom;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="enfants")
      * @ORM\JoinColumn(name="parent_id",referencedColumnName="id", nullable=true)
      */
     private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\User", mappedBy="parent")
+     */
+    private $enfants;
 
     /**
      * @ORM\ManyToOne(targetEntity="ScolariteBundle\Entity\Classe", inversedBy="eleves")
@@ -226,6 +231,27 @@ class User extends BaseUser
     private $sanctionseleve;
 
     /**
+     * @ORM\OneToMany(targetEntity="EnseignantBundle\Entity\Moyennes", mappedBy="eleve")
+     */
+    private $moyennes;
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getMoyennes()
+    {
+        return $this->moyennes;
+    }
+
+    /**
+     * @param ArrayCollection $moyennes
+     */
+    public function setMoyennes($moyennes)
+    {
+        $this->moyennes = $moyennes;
+    }
+
+    /**
      * @return ArrayCollection
      */
     public function getSanctions()
@@ -250,7 +276,7 @@ class User extends BaseUser
     }
 
     /**
-     * @param ArrayCollection $sanctions
+     * @param ArrayCollection $sanctionseleve
      */
     public function setSanctionseleve($sanctionseleve)
     {
@@ -308,13 +334,29 @@ class User extends BaseUser
     /**
      * @return ArrayCollection
      */
+    public function getEnfants()
+    {
+        return $this->enfants;
+    }
+
+    /**
+     * @param ArrayCollection $enfants
+     */
+    public function setEnfants($enfants)
+    {
+        $this->absences = $enfants;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
     public function getAbsenceseleve()
     {
         return $this->absenceseleve;
     }
 
     /**
-     * @param ArrayCollection $noteseleve
+     * @param ArrayCollection $absenceseleve
      */
     public function setAbsenceseleve($absenceseleve)
     {
@@ -330,6 +372,8 @@ class User extends BaseUser
         $this->absenceseleve = new ArrayCollection();
         $this->sanctions = new ArrayCollection();
         $this->sanctionseleve = new ArrayCollection();
+        $this->moyennes = new ArrayCollection();
+        $this->enfants=new ArrayCollection();
     }
 }
 

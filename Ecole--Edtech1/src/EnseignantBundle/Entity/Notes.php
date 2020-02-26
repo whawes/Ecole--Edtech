@@ -1,6 +1,7 @@
 <?php
 
 namespace EnseignantBundle\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,13 +29,12 @@ class Notes
      */
 
     private $type;
-
     /**
      * @var float
      *
      * @ORM\Column(name="valeur", type="float")
+     * @Assert\Range(min="0", max="20", minMessage="pas de nombre negatifs", maxMessage="pas de nombres superieur a 20")
      */
-
     private $valeur;
 
     /**
@@ -60,6 +60,7 @@ class Notes
     /**
      * @ORM\ManyToOne(targetEntity="EnseignantBundle\Entity\Matiere", inversedBy="notes")
      * @ORM\JoinColumn(name="matiere",referencedColumnName="id")
+     * @Assert\NotBlank
      */
     private $matiere;
 

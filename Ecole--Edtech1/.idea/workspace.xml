@@ -56,28 +56,29 @@
       <path value="$PROJECT_DIR$/vendor/sensio/generator-bundle" />
       <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
       <path value="$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle" />
+      <path value="$PROJECT_DIR$/vendor/cmen/google-charts-bundle" />
     </include_path>
   </component>
   <component name="ProjectId" id="1Xc30yTA2RUwS41jU4jPm459X7E" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/AppBundle" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/web/back2" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.zend.framework.tool" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\Ecole--Edtech1\web\back2" />
+      <recent name="C:\wamp64\www\Ecole--Edtech1\web\web2" />
       <recent name="C:\wamp64\www\Ecole--Edtech1\src\AppBundle" />
       <recent name="C:\wamp64\www\Ecole--Edtech1\web\back" />
       <recent name="C:\wamp64\www\Ecole--Edtech1\app\Resources\views" />
-      <recent name="C:\wamp64\www\Ecole--Edtech1\app\Resources\views\default" />
-      <recent name="C:\wamp64\www\Ecole--Edtech1\app\Resources\FOSUserBundle\views" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\Ecole--Edtech1\app\Resources\views" />
       <recent name="C:\wamp64\www\Ecole--Edtech1\web\back" />
       <recent name="C:\wamp64\www\Ecole--Edtech1\web\front" />
       <recent name="C:\wamp64\www\Ecole--Edtech1\app\Resources\views\user" />
-      <recent name="C:\wamp64\www\Ecole--Edtech1\app\Resources\views" />
       <recent name="C:\wamp64\www\Ecole--Edtech1\web" />
     </key>
   </component>
@@ -85,15 +86,18 @@
     <option name="myCommands">
       <command value="s doctrine:database:create" />
       <command value="s doctrine:schema:create" />
-      <command value="s doctrine:generate:crud" />
-      <command value="c dump-autoload" />
       <command value="s server:start" />
-      <command value="s server:run" />
-      <command value="s cache:clear" />
       <command value="s generate:bundle" />
-      <command value="s generate:controller" />
-      <command value="s doctrine:schema:update --force" />
       <command value="s doctrine:generate:entity" />
+      <command value="s doctrine:generate:crud" />
+      <command value="composer require symfony/serializer" />
+      <command value="c require cmen/google-charts-bundle" />
+      <command value="c dump-autoload" />
+      <command value="s generate:controller" />
+      <command value="composer require symfony/validator" />
+      <command value="s doctrine:schema:update --force" />
+      <command value="s cache:clear" />
+      <command value="s server:run" />
     </option>
   </component>
   <component name="RunDashboard">
@@ -128,6 +132,18 @@
       <workItem from="1581875868401" duration="2565000" />
       <workItem from="1581942255822" duration="585000" />
       <workItem from="1581943006375" duration="20647000" />
+      <workItem from="1582046970694" duration="1667000" />
+      <workItem from="1582048660856" duration="8421000" />
+      <workItem from="1582057148122" duration="952000" />
+      <workItem from="1582110773121" duration="41855000" />
+      <workItem from="1582187790141" duration="10328000" />
+      <workItem from="1582241727976" duration="35277000" />
+      <workItem from="1582449999652" duration="19472000" />
+      <workItem from="1582538057889" duration="1640000" />
+      <workItem from="1582540830133" duration="7778000" />
+      <workItem from="1582558648911" duration="8339000" />
+      <workItem from="1582571118837" duration="15462000" />
+      <workItem from="1582713439549" duration="4025000" />
     </task>
     <servers />
   </component>

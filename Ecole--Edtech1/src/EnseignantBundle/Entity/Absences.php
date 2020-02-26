@@ -1,6 +1,7 @@
 <?php
 
 namespace EnseignantBundle\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -26,6 +27,7 @@ class Absences
      * @var \DateTime
      *
      * @ORM\Column(name="dateabs", type="date", nullable=true)
+     * @Assert\NotBlank
      */
 
     private $date_abs;
@@ -42,6 +44,7 @@ class Absences
      * @var int
      *
      * @ORM\Column(name="heuredebut", type="integer")
+     * @Assert\Range(min="8", max="16", minMessage="les cours ne commencent pas avant 8 heure", maxMessage="les cours finissent a 16h")
      */
     private $heuredebut;
 
@@ -55,6 +58,7 @@ class Absences
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="absenceseleve")
      * @ORM\JoinColumn(name="eleve_id",referencedColumnName="id")
+     * @Assert\NotBlank
      */
     private $eleve;
 
@@ -174,6 +178,7 @@ class Absences
      * @var int
      *
      * @ORM\Column(name="heurefin", type="integer")
+     * @Assert\Range(min="8", max="16", minMessage="les cours ne commencent pas avant 8 heure", maxMessage="les cours finissent a 16h")
      */
     private $heurefin;
 

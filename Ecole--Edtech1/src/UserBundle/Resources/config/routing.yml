@@ -2,6 +2,14 @@ user_homepage:
     path:     /showeleves
     defaults: { _controller: UserBundle:User:showeleves }
 
+user_moyennesmatiere:
+    path:   /{id}/{matiere}/usermoyennesmatiere
+    defaults: { _controller: UserBundle:User:usermoyennesmatiere }
+
+user_indexenseignant:
+    path:     /indexenseignant
+    defaults: { _controller: UserBundle:User:indexenseignant }
+
 user_espaceparent:
     path:     /espaceparent
     defaults: { _controller: UserBundle:User:espaceparent }
@@ -9,6 +17,10 @@ user_espaceparent:
 user_profile:
     path:   /userprofile
     defaults: { _controller: UserBundle:User:profile }
+
+user_moyennes:
+    path:   /{id}/usermoyennes
+    defaults: { _controller: UserBundle:User:usermoyennes}
 
 user_notes:
     path:   /{id}/usernotes
