@@ -1,0 +1,17 @@
+user_index:
+    path:     /
+    defaults: { _controller: "AppBundle:User:index" }
+    methods:  GET
+
+user_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppBundle:User:show" }
+    methods:  GET
+
+
+user_addCourse:
+    path:     /{id}/addcourse
+    defaults: { _controller: "AppBundle:User:addCourse" }
+    methods:  [GET, POST]
+
+

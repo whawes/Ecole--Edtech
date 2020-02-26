@@ -1,19 +1,48 @@
 club_homepage:
-    path:     /
-    defaults: { _controller: ClubBundle:Default:index }
+  path:     /
+  defaults: { _controller: fos_user.security.controller:loginAction}
 
 add:
-    path:     /add
-    defaults: { _controller: ClubBundle:Clubs:add }
-
-update:
-    path:     /update
-    defaults: { _controller: ClubBundle:Clubs:update }
+  path:     /add
+  defaults: { _controller: ClubBundle:Club:addClub }
 
 delete:
-    path:     /delete
-    defaults: { _controller: ClubBundle:Clubs:delete }
+  path:     /delete/{id}
+  defaults: { _controller: ClubBundle:Club:delete }
 
-view:
-    path:     /view
-    defaults: { _controller: ClubBundle:Clubs:view }
+update:
+  path:     /update/{id}
+  defaults: { _controller: ClubBundle:Club:update }
+
+addEvent:
+  path:     /addEvent
+  defaults: { _controller: ClubBundle:Evenement:addEvent }
+
+viewEvent:
+  path:     /viewEvent
+  defaults: { _controller: ClubBundle:Evenement:view }
+
+updateEvent:
+  path:     /updateEvent/{id}
+  defaults: { _controller: ClubBundle:Evenement:update }
+
+deleteEvent:
+  path:     /deleteEvent/{id}
+  defaults: { _controller: ClubBundle:Evenement:delete }
+
+
+searchEvent:
+  path:     /searchEvent
+  defaults: { _controller: ClubBundle:Evenement:search }
+
+front_view_clubs:
+  path:     /front_view_clubs
+  defaults: { _controller: ClubBundle:Club:front_view_clubs}
+
+front_home_page:
+  path:     /front_home_page
+  defaults: { _controller: ClubBundle:Club:front_home_page}
+
+front_view_event:
+  path:     /front_view_event
+  defaults: { _controller: ClubBundle:Evenement:front_view_event }

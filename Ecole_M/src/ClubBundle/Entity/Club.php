@@ -3,6 +3,7 @@
 namespace ClubBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Club
@@ -24,10 +25,28 @@ class Club
     /**
      * @var string
      *
-     * @ORM\Column(name="nom_club", type="string", length=255)
+     * @ORM\Column(name="nomclub", type="string", length=255)
+     *
+     * @Assert\NotBlank()
      */
-    private $nomClub;
+    private $nomclub;
 
+
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinColumn(referencedColumnName="id")
+     */
+
+    private $User;
+
+    /**
+     * @ORM\Column(type="string",length=255,nullable=true)
+     */
+    public $nomImage;
+    /**
+     * @Assert\File(maxSize="5000k")
+     */
+    public $file;
 
     /**
      * Get id
@@ -40,27 +59,94 @@ class Club
     }
 
     /**
-     * Set nomClub
+     * Set nomclub
      *
-     * @param string $nomClub
-     *
+     * @param string $nomclub
      * @return Club
      */
-    public function setNomClub($nomClub)
+    public function setNomclub($nomclub)
     {
-        $this->nomClub = $nomClub;
+        $this->nomclub = $nomclub;
 
         return $this;
     }
 
     /**
-     * Get nomClub
+     * Get nomclub
      *
      * @return string
      */
-    public function getNomClub()
+    public function getNomclub()
     {
-        return $this->nomClub;
+        return $this->nomclub;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Club
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->User = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->User;
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->nomImage ? null : $this->getUploadDir . '/' . $this->nomImage;
+    }
+
+    protected function getUploadRootDir()
+    {
+        return __DIR__ . '/../../../web/' . $this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        return 'images';
+    }
+
+    public function uploadProfilePicture()
+    {
+        $this->file->move($this->getUploadRootDir(), $this->file->getClientOriginalName());
+        $this->nomImage = $this->file->getClientOriginalName();
+        $this->file = null;
+    }
+
+    /**
+     * Set nomImage
+     *
+     * @param string $nomImage
+     *
+     * @return Club
+     */
+    public function setNomImage($nomImage)
+    {
+        $this . $this->nomImage == $nomImage;
+        return $this;
+    }
+
+    /**
+     * Get NomImage
+     *
+     * @return string
+     */
+    public function getNomImage()
+    {
+        return $this->nomImage;
     }
 }
-

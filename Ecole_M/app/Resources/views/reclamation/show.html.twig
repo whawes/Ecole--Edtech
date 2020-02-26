@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1 class="section-title">Informations sur la réclamation</h1>
+    <table width="70%">
+        <tbody>
+
+            <tr>
+                <th><h4>Type</h4></th>
+                <td><h4>{{ reclamation.type }}</h4></td>
+            </tr
+            <tr>
+                <th><h4>Nom Objet Réclamé</h4></th>
+                <td><h4>{{ reclamation.nomobjet }}</h4></td>
+            </tr>
+            <tr>
+                <th><h4>Description</h4></th>
+                <td><h4>{{ reclamation.description }}</h4></td>
+            </tr>
+            <tr>
+                <th><h4>Date de la réclamation</h4></th>
+                <td><h4>{% if reclamation.date %}{{ reclamation.date|date('Y-m-d H:i:s') }}{% endif %}</h4></td>
+            </tr>
+            <tr>
+                <th><h4>Etat</h4></th>
+                <td><h4>{{ reclamation.etat }}</h4></td>
+            </tr>
+        </tbody>
+    </table>
+<br/>
+    <ul>
+        <li>
+            <a href="{{ path('reclamation_index') }}" class="btn">Consulter vos réclamations</a>
+        </li>
+        <br/>
+        {% if reclamation.etat=='non traitee' %}
+        <li>
+            <a href="{{ path('reclamation_edit', { 'id': reclamation.id }) }}" class="btn">Modifier la réclamation</a>
+        </li>
+        {% endif %}
+        <br/>
+        {% if reclamation.etat=='non traitee' %}
+        <li>
+            <a href="{{ path('supprimer_reclamation', { 'id': reclamation.id }) }}" class="btn">Supprimer la réclamation</a>
+        </li>
+        {% endif %}
+    </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends '/back/baseBack.html.twig' %}
+{% block title %}Admin{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock stylesheets %}
+
+{% block body %}
+    {% block header %}
+        {{ parent() }}
+    {% endblock header  %}
+
+    {% block sideBar %}
+        {{ parent() }}
+    {% endblock  sideBar %}
+
+    {% block container %}
+        {{ parent() }}
+    {% endblock container %}
+
+<div class="main-content">
+    <h1>Liste des réclamations</h1>
+    <br/>
+    <div class="col-md-12">
+
+        <div class="table-responsive table-responsive-data2">
+            <table class="table table-data2">
+                <thead>
+                <tr>
+                    <th>ID User</th>
+                    <th>ID Réclamation</th>
+                    <th>Type</th>
+                    <th>Nom Objet</th>
+                    <th>Date</th>
+                    <th>Etat</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="tr-shadow">
+                <tr class="spacer"></tr>
+
+                {% for reclamation in reclamations %}
+                    <tr class="tr-shadow">
+
+                        <td class="main-content">{{ reclamation.iduser }}</td>
+                        <td class="main-content">{{ reclamation.id }}</td>
+                        <td class="main-content">{{ reclamation.type }}</td>
+                        <td class="main-content">{{ reclamation.nomobjet }}</td>
+                        <td class="main-content">{% if reclamation.date %}{{ reclamation.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td class="main-content"><span
+                                    {% if reclamation.etat=='non traitee' %}
+                                    class="status--denied"
+                                    {% else %}
+                                    class="status--process"
+                                    {% endif %}>{{ reclamation.etat }}</span></td>
+
+                        <td>
+                            {% if reclamation.etat=='non traitee' %}
+                        <a href="{{ path('traiter_reclamation', { 'id': reclamation.id }) }}">Traiter <i class="zmdi zmdi-edit"></i></a>
+                            {% endif %}
+
+                        <a href="{{ path('adminsupprimer_reclamation', { 'id': reclamation.id }) }}">Supprimer <i class="zmdi zmdi-delete"></i></a></td>
+                    </tr>
+
+                {% endfor %}
+
+                <tr class="spacer"></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock javascripts %}

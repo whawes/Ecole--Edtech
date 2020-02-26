@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1 class="section-title">Liste de vos réclamations</h1>
+    <table width="100%">
+        <thead>
+            <tr>
+
+                <th>Type</th>
+                <th>Nom Objet Réclamé</th>
+                <th>Date de la réclamation</th>
+                <th>Etat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reclamation in reclamations %}
+            <tr>
+
+                <td>{{ reclamation.type }}</td>
+                <td>{{ reclamation.nomobjet }}</td>
+                <td>{% if reclamation.date %}{{ reclamation.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ reclamation.etat }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('reclamation_show', { 'id': reclamation.id }) }}">Afficher</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('reclamation_edit', { 'id': reclamation.id }) }}" {% if reclamation.etat=='traitee' %}hidden{% endif %}>Modifier</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <br/>
+            <a href="{{ path('reclamation_new') }}" class="btn">Envoyer une réclamation</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

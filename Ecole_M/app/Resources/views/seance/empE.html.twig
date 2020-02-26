@@ -1,0 +1,98 @@
+{% extends 'Front/front.base.html.twig' %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+
+
+
+    <div class="container">
+                <table border="1px solid black" style="position: center;background-color: #ffffff; width: 100%;">
+
+                    <tr>
+
+                    </tr>
+                    {% for f in fs %}
+                    <tr>
+                        <td style="background-color: #ffffff">{{ f.js }}</td>
+
+                        {#
+                                 {% if (t.hdeb == f.hs[0].h_d ) or (t.hdeb == f.hs[1].h_d ) or (t.hdeb == f.hs[2].h_d ) or (t.hdeb == f.hs[3].h_d )
+                                        or (t.hdeb == f.hs[4].h_d )
+                                    %}
+
+                                    {% endif %}
+                        #}
+
+                        {% for t in st %}
+                            {# {% if (f.j1 == t.jour) or (f.j2 == t.jour)or (f.j3 == t.jour)  or (f.j4 == t.jour) or (f.j5 == t.jour)
+                                or (f.j6 == t.jour)
+                                 and  (t.hdeb == f.h_d ) and (t.hfin == f.h_f) %} #}
+                            {% if (f.js == t.jour) %}
+                                {#<td style="background-color: #5eb5e0" > *** {{ t.hdeb |date('H:i:s') }} </td>#}
+                                {# {% if (t.hdeb |date('h:i:s') == f.hs[0].h_d |date('h:i:s') ) or (t.hdeb |date('h:i:s') == f.hs[1].h_d |date('h:i:s') ) or (t.hdeb |date('h:i:s')== f.hs[2].h_d |date('h:i:s')) or (t.hdeb |date('h:i:s') == f.hs[3].h_d |date('h:i:s') )
+                                         or (t.hdeb |date('h:i:s') == f.hs[4].h_d |date('h:i:s') ) %}#}
+
+                                <td style="background-color: #f2f2f2 ;width: available;" >  {{ t.hdeb |date('H:i:s') }} - {{ t.hfin |date('H:i:s') }} <br>  {{   t.matiere.nom  }}  <br> <br> Salle: {{ t.salle.libelle }}<br></td>
+
+                                {#{% endif %}#}
+
+
+                                {# {% if (t.hdeb |date('h:i:s') == f.hs[0].h_d |date('h:i:s') ) %}
+                                                    <td style="background-color: #5eb5e0" > *** {{ t.hdeb |date('H:i:s') }} </td>
+                                                {% endif %}
+
+                                                {% if (t.hdeb |date('h:i:s') == f.hs[1].h_d |date('h:i:s') ) %}
+                                                   {% if (t.hdeb |date('h:i:s') == f.hs[0].h_d |date('h:i:s') ) %}
+                                                       <td style="background-color: #5eb5e0" > *** {{ t.hdeb |date('H:i:s') }} </td>
+                                                       {% else %}
+                                                           <td></td> <td style="background-color: #5eb5e0" > *** {{ t.hdeb |date('H:i:s') }} </td>
+                                                       {% endif %}
+                                                {% endif %}
+
+
+                                                    {% if (t.hdeb |date('h:i:s') == f.hs[2].h_d |date('h:i:s') ) %}
+
+                                                        {% if (t.hdeb |date('h:i:s') == f.hs[0].h_d |date('h:i:s') ) %}
+                                                            <td></td> <td style="background-color: #5eb5e0" > *** {{ t.hdeb |date('H:i:s') }} </td>
+                                                        {% if (t.hdeb |date('h:i:s') == f.hs[1].h_d |date('h:i:s') ) %}
+                                                            <td style="background-color: #5eb5e0" > *** {{ t.hdeb |date('H:i:s') }} </td>
+                                                        {% endif %}
+                                                        {% else %}
+                                                        <td></td> <td style="background-color: #5eb5e0" > *** {{ t.hdeb |date('H:i:s') }} </td>
+
+                                                        {% endif %}
+                                                    {% endif %}
+
+
+
+                                                        {% if (t.hdeb |date('h:i:s') == f.hs[3].h_d |date('h:i:s') ) %}
+                                                              <td style="background-color: #5eb5e0" > *** {{ t.hdeb |date('H:i:s') }} </td>
+                                                        {% endif %}
+
+
+
+                                                            {% if (t.hdeb |date('h:i:s') == f.hs[4].h_d |date('h:i:s') ) %}
+
+                                                                  <td style="background-color: #5eb5e0" > *** {{ t.hdeb |date('H:i:s') }} </td>
+
+                                                            {% endif %}#}
+
+                            {% endif %}
+
+                        {% endfor %}
+
+                        {% endfor %}
+
+                </table>
+            </div>
+
+
+
+{% endblock body %}
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

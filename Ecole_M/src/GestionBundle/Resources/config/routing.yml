@@ -1,0 +1,24 @@
+gestion_homepage:
+    path:     /
+    defaults: { _controller: AppBundle:Default:index }
+add_attestation:
+    path:     /attestation/
+    defaults: { _controller: GestionBundle:Attestation:index }
+add_reclamation:
+    path:     /reclamation/
+    defaults: { _controller: GestionBundle:Reclamation:index }
+consulter_reclamation:
+    path:     /reclamations/
+    defaults: { _controller: GestionBundle:Reclamation:indexadmin }
+supprimer_reclamation:
+    path:     /reclamationdel/{id}
+    defaults: { _controller: GestionBundle:Reclamation:supprimer }
+supprimer_attestation:
+    path:     /attestationdel/{id}
+    defaults: { _controller: GestionBundle:Attestation:supprimer }
+add_permutation:
+    path:     /permutation/
+    defaults: { _controller: GestionBundle:Permutation:index }
+supprimer_permutation:
+    path:     /permutationdel/{id}
+    defaults: { _controller: GestionBundle:Permutation:supprimer }

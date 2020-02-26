@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1 class="section-title">Liste de vos demandes d'attestation de présence</h1>
+            <table width=70%">
+        <thead>
+            <tr>
+                <th>Etat de la demande</th>
+                <th>Date de la demande</th>
+
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for attestation in attestations %}
+            <tr>
+                <td>{{ attestation.etat }}</td>
+                <td>{% if attestation.date %}{{ attestation.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('attestation_show', { 'id': attestation.id }) }}">Afficher</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('attestation_new') }}" class="btn">Demander une nouvelle attestation</a>
+        </li>
+    </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

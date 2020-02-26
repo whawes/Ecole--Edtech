@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Cour</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cour.id }}</td>
+            </tr>
+            <tr>
+                <th>String</th>
+                <td>{{ cour.string }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ cour.nom }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{% if cour.date %}{{ cour.date|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Contenu</th>
+                <td>{{ cour.contenu }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('cours_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('cours_edit', { 'id': cour.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,11 @@
+edtech_course:
+    resource: "@EdtechBundle/Resources/config/routing/course.yml"
+    prefix:   /back/course
+
+edtech_homepage:
+    path:     /
+    defaults: { _controller: AppBundle:Default:index }
+
+edtech_homepage_back:
+  path:     /back
+  defaults: { _controller: AppBundle:Default:index }

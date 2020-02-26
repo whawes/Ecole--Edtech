@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Seances list</h1>
+    {% for flash_message in app.session.flashBag.get('error') %}
+        <div class="alert alert-success">
+            {{ flash_message }}
+        </div>
+    {% endfor %}
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Jour</th>
+                <th>Hdeb</th>
+                <th>Hfin</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for seance in seances %}
+            <tr>
+                <td><a href="{{ path('seance_show', { 'id': seance.id }) }}">{{ seance.id }}</a></td>
+                <td>{{ seance.jour }}</td>
+                <td>{% if seance.hdeb %}{{ seance.hdeb|date('H:i:s') }}{% endif %}</td>
+                <td>{% if seance.hfin %}{{ seance.hfin|date('H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('seance_show', { 'id': seance.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('seance_edit', { 'id': seance.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('seance_new') }}">Create a new seance</a>
+        </li>
+    </ul>
+{% endblock %}
